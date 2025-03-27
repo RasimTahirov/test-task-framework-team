@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 100px;
+  font-size: 1rem;
+}
+
+input,
+input:hover {
+  border: none;
+  outline: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}

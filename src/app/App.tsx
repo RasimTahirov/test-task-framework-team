@@ -4,13 +4,18 @@ import {
   useGetPaintingsQuery,
 } from "../api/api";
 import Header from "../components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "../components/Search";
 import PaintingsCards from "../components/PaintingsCards";
 import Pagination from "../components/Pagination";
 import { IPaintings } from "../types/types";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store/store";
+import { setTheme } from "../store/slice";
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [pagination, setPagination] = useState(1);
   const [title, setTitle] = useState("");
 
@@ -26,6 +31,10 @@ function App() {
     author: authors.find((author) => author.id === painting.authorId),
     location: locations.find((location) => location.id === painting.locationId),
   }));
+
+  useEffect(() => {
+    dispatch(setTheme(localStorage.getItem("theme") as "light"));
+  }, [dispatch]);
 
   return (
     <main>

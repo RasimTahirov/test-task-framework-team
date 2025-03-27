@@ -1,20 +1,34 @@
-import logo from "../../public/logo/logo.svg";
+import lightLogo from "../../public/logo/light-logo.svg";
+import darkLogo from "../../public/logo/dark-logo.svg";
 import dark from "../../public/icon/dark-icon.svg";
+import light from "../../public/icon/light-icon.svg";
 import styles from "../styles/styles.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { toggleTheme } from "../store/slice";
 
 const Header = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const theme = useSelector((state: RootState) => state.theme.theme);
+
   return (
     <header className={styles.header}>
       <figure>
-        <img src={logo} alt="Framework Team" />
+        <img
+          src={theme === "light" ? lightLogo : darkLogo}
+          alt="Framework Team"
+        />
       </figure>
-      <div className={styles.iconContainer}>
+      <button
+        className={styles.iconContainer}
+        onClick={() => dispatch(toggleTheme())}
+      >
         <img
           className={styles.iconTheme}
-          src={dark}
-          alt="поменять потом при смене темы"
+          src={theme === "light" ? dark : light}
+          alt={theme}
         />
-      </div>
+      </button>
     </header>
   );
 };

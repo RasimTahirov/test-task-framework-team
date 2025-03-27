@@ -1,0 +1,23 @@
+:root {
+  --border-pagination-color: #9c9c9c;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --theme-toggle: #1a1818;
+  --theme-toggle-hover: #1b1b1b;
+  --text-color: #dedede;
+  --accent-color: #ab8956;
+  --pagination-card-color: #1a1818;
+  --border-input-search: #121212
+}
+
+[data-theme="light"] {
+  --bg-color: #ffffff;
+  --theme-toggle: #fcfcfc;
+  --theme-toggle-hover: #f3f3f3;
+  --text-color: #575757;
+  --accent-color: #9b4b4b;
+  --pagination-card-color: #f3f3f3;
+  --border-input-search: #dedede
+}

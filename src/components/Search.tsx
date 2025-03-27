@@ -7,9 +7,10 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = ({ setTitle }) => {
   return (
-    <div className={style.search} role="search">
+    <div className={style.search} aria-label="search">
       <img className={style.searchIcon} src={search} alt="search" />
       <input
+        type="search"
         className={style.searchInput}
         placeholder="Painting title"
         onChange={(e) => setTitle(e.target.value)}
