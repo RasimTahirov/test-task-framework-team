@@ -1,6 +1,6 @@
 import logo from '../../public/logo/logo.svg';
 import dark from '../../public/icon/dark-icon.svg'
-import styles from '../styles/styles.module.css'
+import styles from '../styles/styles.module.scss'
 
 const Header = () => {
   return (
