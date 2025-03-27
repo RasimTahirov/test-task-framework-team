@@ -1,24 +1,39 @@
-import { useGetAuthorQuery, useGetLocationQuery, useGetPaintingsQuery } from "../api/api";
+import { useGetAuthorQuery, useGetLocationQuery, useGetPaintingsQuery, useLazyGetPaintingsQuery } from "../api/api";
 import Header from "./Header";
 import styles from '../styles/styles.module.scss'
+import { useState } from "react";
 
 function App() {
-  const { data: paintings = [] } = useGetPaintingsQuery()
+  const [pagination, setPagination] = useState(1)
+  const limit = 6
+
+  const { data: paintings = [] } = useGetPaintingsQuery({ _page: pagination, _limit: limit })
   const { data: authors = [] } = useGetAuthorQuery()
   const { data: locations = [] } = useGetLocationQuery()
 
-  const paintingWithAuthor = paintings.map((painting) => ({
+  const [trigger] = useLazyGetPaintingsQuery()
+
+  const paintingWithAuthor = paintings?.payload?.map((painting) => ({
     ...painting,
     author: authors.find((author) => author.id === painting.authorId),
     location: locations.find((location) => location.id === painting.locationId)
-  })
+  }))
 
-  )
+  const pagin = Math.ceil(paintings.total / limit)
+  const paginArray = Array.from({ length: pagin }, (_, i) => i + 1)
+  console.log(paginArray);
+
+
+  const handlePageChange = (newPage: number) => {
+    setPagination(newPage)
+    trigger({ _page: newPage, _limit: limit })
+  }
+
 
   return (
     <main>
       <Header />
-      <div className={styles.paintingsContainer}>{paintingWithAuthor.map((painting) => (
+      <div className={styles.paintingsContainer}>{Array.isArray(paintingWithAuthor) && paintingWithAuthor.map((painting) => (
         <div className={styles.paintings} key={painting.id}>
           <img className={styles.image} src={`https://test-front.framework.team/${painting.imageUrl}`} alt="" />
           <div className={styles.paintingsInfo}>
@@ -37,7 +52,19 @@ function App() {
             </div>
           </div>
         </div>
-      ))}</div>
+      ))}
+      </div>
+      <div>
+        <div>
+          <button disabled={pagination === 1} onClick={() => handlePageChange(pagination - 1)}>Назад</button>
+          {paginArray.map((page) => (
+            <div>
+              <div key={page} onClick={() => handlePageChange(page)}>{page}</div>
+            </div>
+          ))}
+        </div>
+        <button disabled={pagination === pagin} onClick={() => handlePageChange(pagination + 1)}>Вперед</button>
+      </div>
     </main>
   );
 }
