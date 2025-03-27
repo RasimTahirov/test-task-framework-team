@@ -7,9 +7,13 @@ export const paintingsApi = createApi({
   endpoints: (builder) => ({
     getPaintings: builder.query<
       { payload: IPaintings; total: number },
-      { _page: number; _limit: number }
+      { _page: number; _limit: number; title?: string }
     >({
-      query: ({ _page, _limit }) => `paintings?_page=${_page}&_limit=${_limit}`,
+      query: ({ _page, _limit, title }) => {
+        let url = `paintings?_page=${_page}&_limit=${_limit}`;
+        if (title) url += `&q=${title}`;
+        return url;
+      },
       transformResponse: (res: IPaintings, meta) => {
         const total = Number(meta?.response?.headers.get("X-Total-Count"));
         return { payload: res, total };
@@ -24,5 +28,9 @@ export const paintingsApi = createApi({
   }),
 });
 
-export const { useGetPaintingsQuery, useGetAuthorQuery, useGetLocationQuery, useLazyGetPaintingsQuery } =
-  paintingsApi;
+export const {
+  useGetPaintingsQuery,
+  useGetAuthorQuery,
+  useGetLocationQuery,
+  useLazyGetPaintingsQuery,
+} = paintingsApi;

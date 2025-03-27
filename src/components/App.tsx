@@ -1,13 +1,14 @@
-import { useGetAuthorQuery, useGetLocationQuery, useGetPaintingsQuery, useLazyGetPaintingsQuery } from "../api/api";
+import { useGetAuthorQuery, useGetLocationQuery, useGetPaintingsQuery, useLazyGetPaintingsQuery, useSeatchPaintingsQuery } from "../api/api";
 import Header from "./Header";
 import styles from '../styles/styles.module.scss'
 import { useState } from "react";
 
 function App() {
   const [pagination, setPagination] = useState(1)
+  const [title, setTitle] = useState('')
   const limit = 6
 
-  const { data: paintings = [] } = useGetPaintingsQuery({ _page: pagination, _limit: limit })
+  const { data: paintings = [] } = useGetPaintingsQuery({ _page: pagination, _limit: limit, title })
   const { data: authors = [] } = useGetAuthorQuery()
   const { data: locations = [] } = useGetLocationQuery()
 
@@ -33,6 +34,7 @@ function App() {
   return (
     <main>
       <Header />
+      <input onChange={(e) => setTitle(e.target.value)}/>
       <div className={styles.paintingsContainer}>{Array.isArray(paintingWithAuthor) && paintingWithAuthor.map((painting) => (
         <div className={styles.paintings} key={painting.id}>
           <img className={styles.image} src={`https://test-front.framework.team/${painting.imageUrl}`} alt="" />
