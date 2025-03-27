@@ -1,18 +1,22 @@
-import logo from '../../public/logo/logo.svg';
-import dark from '../../public/icon/dark-icon.svg'
-import styles from '../styles/styles.module.scss'
+import logo from "../../public/logo/logo.svg";
+import dark from "../../public/icon/dark-icon.svg";
+import styles from "../styles/styles.module.scss";
 
 const Header = () => {
   return (
     <header className={styles.header}>
-      <div>
+      <figure>
         <img src={logo} alt="Framework Team" />
-      </div>
+      </figure>
       <div className={styles.iconContainer}>
-        <img className={styles.iconTheme} src={dark} alt="поменять потом при смене темы" />
+        <img
+          className={styles.iconTheme}
+          src={dark}
+          alt="поменять потом при смене темы"
+        />
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

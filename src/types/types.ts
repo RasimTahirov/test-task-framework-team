@@ -5,14 +5,20 @@ export interface IPaintings {
   imageUrl: string;
   locationId: number;
   name: string;
+  author?: IAuthors;
+  location?: ILocations;
 }
-
 export interface IAuthors {
   id: number;
-  name: string
+  name: string;
 }
 
 export interface ILocations {
   id: number;
-  location: string
+  location: string;
+}
+
+export interface IPaintingsResponse {
+  payload: IPaintings[];
+  total: number;
 }

@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IAuthors, ILocations, IPaintings } from "../types/types";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const paintingsApi = createApi({
   reducerPath: "paintingsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://test-front.framework.team/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
     getPaintings: builder.query<
-      { payload: IPaintings; total: number },
+      { payload: IPaintings[]; total: number },
       { _page: number; _limit: number; title?: string }
     >({
       query: ({ _page, _limit, title }) => {
@@ -14,7 +16,7 @@ export const paintingsApi = createApi({
         if (title) url += `&q=${title}`;
         return url;
       },
-      transformResponse: (res: IPaintings, meta) => {
+      transformResponse: (res: IPaintings[], meta) => {
         const total = Number(meta?.response?.headers.get("X-Total-Count"));
         return { payload: res, total };
       },

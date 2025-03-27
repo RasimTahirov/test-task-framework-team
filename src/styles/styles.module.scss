@@ -6,6 +6,7 @@
   padding: 0;
 }
 
+// Перенести в global то что ниже
 body {
   max-width: 1440px; /* Временно */
   margin: 0 auto;
@@ -13,12 +14,28 @@ body {
   font-size: 1rem;
 }
 
+input,
+input:hover {
+  border: none;
+  outline: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+// Перенести в global то что выше
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  margin-bottom: 100px;
+  margin-bottom: 44px;
 }
 
 .iconContainer {
@@ -41,6 +58,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 31px;
+  margin-bottom: 40px;
 }
 
 .paintings {
@@ -65,15 +83,15 @@ body {
   transform: scale(1.05);
 }
 
-.paintings:hover .authorAndLocation {
+.paintings:hover .paintingMeta {
   transform: translateX(0);
 }
 
-.paintings:hover .nameAndCreated {
+.paintings:hover .paintingHeader {
   transform: translateY(200%);
 }
 
-.paintingsInfo {
+.paintingsInfoContainer {
   position: absolute;
   background-color: #ffffff;
   width: 300px;
@@ -81,23 +99,22 @@ body {
   bottom: 0;
 }
 
-.paintingInfo2 {
+.paintingInfo {
   display: flex;
   flex-direction: column;
   column-gap: 10px;
   height: 100%;
-  // justify-content: center;
   padding: 20px;
 }
 
-.paintingName {
+.paintingInfoTop {
   font-size: 18px;
   font-family: "Cormorant-SC";
   font-weight: 500;
   text-transform: uppercase;
 }
 
-.paintingCreated {
+.paintingInfoBottom {
   font-family: "Inter";
   font-weight: 700;
   font-size: 0.875rem;
@@ -113,12 +130,95 @@ body {
   transform: translateY(-50%);
 }
 
-.authorAndLocation {
+.paintingMeta {
   position: absolute;
   transform: translateX(-200%);
   transition: all 0.5s ease-out;
 }
 
-.nameAndCreated {
+.paintingHeader {
   transition: all 0.5s ease-out;
+}
+
+.search {
+  display: flex;
+  justify-self: end;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  width: 392px;
+  padding: 8px 0;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  font-size: 14px;
+  font-family: "Inter";
+  font-weight: 300;
+}
+
+.searchIcon {
+  padding: 0 16px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 100px;
+}
+
+.nextArrow {
+  margin-left: 10px;
+}
+
+.backArrow {
+  margin-right: 10px;
+}
+
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.paginationNumber {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  color: #575757;
+}
+
+.paginationNumber:hover {
+  border-bottom: 1px solid #9c9c9c;
+  font-weight: 500;
+}
+
+.paginationNumberActive {
+  font-weight: 500;
+  border-radius: 4px;
+  background: #f3f3f3;
+  border-radius: 4px;
+}
+
+.paginationNumber.paginationNumberActive:hover {
+  border-bottom: none; 
+  cursor: default;
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.arrow:hover {
+  background: #f3f3f3;
+  fill: red !important;
 }
