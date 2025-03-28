@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Search from "../components/Search";
 import PaintingsCards from "../components/PaintingsCards";
 import Pagination from "../components/Pagination";
-import { IPaintings } from "../types/types";
+import { IPaintings, Theme } from "../types/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { setTheme } from "../store/slice";
@@ -34,7 +34,11 @@ function App() {
   });
 
   useEffect(() => {
-    dispatch(setTheme(localStorage.getItem("theme") as "light"));
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    const theme = storedTheme || "light";
+    
+    dispatch(setTheme(theme));
+    document.documentElement.setAttribute("data-theme", theme);
   }, [dispatch]);
 
   return (

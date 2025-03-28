@@ -22,3 +22,5 @@ export interface IPaintingsResponse {
   payload: IPaintings[];
   total: number;
 }
+
+export type Theme = "light" | "dark";
