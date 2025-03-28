@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+  font-size: 1rem;
+  padding: 0 100px;
+}
+@media (max-width: 1440px) {
+  body {
+    padding-left: calc(
+      100px - (100px - 20px) * ((1440px - 100vw) / (1440px - 768px))
+    );
+    padding-right: calc(
+      100px - (100px - 20px) * ((1440px - 100vw) / (1440px - 768px))
+    );
+  }
+}
+@media (max-width: 768px) {
+  body {
+    padding: 0 20px;
+  }
+}
+
+input,
+input:hover {
+  border: none;
+  outline: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
