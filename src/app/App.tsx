@@ -26,11 +26,12 @@ function App() {
   const { data: authors = [] } = useGetAuthorQuery();
   const { data: locations = [] } = useGetLocationQuery();
 
-  const paintingsWithDetails = paintings?.payload?.map((painting) => ({
-    ...painting,
-    author: authors.find((author) => author.id === painting.authorId),
-    location: locations.find((location) => location.id === painting.locationId),
-  }));
+  const paintingsWithDetails = paintings?.payload?.map((painting) => {
+    const author = authors.find(({ id }) => id === painting.authorId);
+    const location = locations.find(({ id }) => id === painting.locationId);
+
+    return { ...painting, author, location };
+  });
 
   useEffect(() => {
     dispatch(setTheme(localStorage.getItem("theme") as "light"));
@@ -40,8 +41,12 @@ function App() {
     <main>
       <Header />
       <Search setTitle={setTitle} />
-      <PaintingsCards paintingsWithDetails={paintingsWithDetails} />
+      <PaintingsCards
+        paintingsWithDetails={paintingsWithDetails}
+        title={title}
+      />
       <Pagination
+        paintingsWithDetails={paintingsWithDetails}
         pagination={pagination}
         setPagination={setPagination}
         limit={limit}
