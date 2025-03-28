@@ -5,7 +5,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const paintingsApi = createApi({
   reducerPath: "paintingsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getPaintings: builder.query<
       { payload: IPaintings[]; total: number },

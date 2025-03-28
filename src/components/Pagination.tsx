@@ -1,9 +1,9 @@
+import classNames from "classnames";
 import { useLazyGetPaintingsQuery } from "../api/api";
+import { IPaintings, IPaintingsResponse } from "../types/types";
 import backIcon from "../../public/icon/back-arrow-icon.svg";
 import nextIcon from "../../public/icon/next-arrow-icon.svg";
 import style from "../styles/styles.module.scss";
-import classNames from "classnames";
-import { IPaintings, IPaintingsResponse } from "../types/types";
 
 interface PaginationProps {
   setPagination: (page: number) => void;

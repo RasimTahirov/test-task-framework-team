@@ -1,11 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { toggleTheme } from "../store/slice";
 import lightLogo from "../../public/logo/light-logo.svg";
 import darkLogo from "../../public/logo/dark-logo.svg";
 import dark from "../../public/icon/dark-icon.svg";
 import light from "../../public/icon/light-icon.svg";
 import styles from "../styles/styles.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store/store";
-import { toggleTheme } from "../store/slice";
 
 const Header = () => {
   const dispatch = useDispatch<AppDispatch>();
